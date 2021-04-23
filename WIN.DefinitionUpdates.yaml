@@ -1,0 +1,20 @@
+---
+# Ansible playbook to run Windows Update and restart, if required
+#
+# http://docs.ansible.com/ansible/win_updates_module.html
+# https://docs.ansible.com/ansible/win_reboot_module.html
+
+- name:  Definition Update
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Running Defender Definition Update
+      win_updates:
+        category_names: ['Definition Updates','Microsoft Defender Antivirus']
+        log_path: C:\Temp\AnsibleLogs\patchWindows.txt
+      register: result
+      
+
+    # output results
+    - debug: var=result
+    
